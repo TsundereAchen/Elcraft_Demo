@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="GameScene" width="640" height="960" xmlns:e="http://ns.egret.com/eui">
+	<e:Image source="bg_ofen_png" x="0" y="0"/>
+	<e:Image source="fg_ofen_png" x="0" y="0"/>
+	<e:Image source="bg_leiste_png" x="0" y="80"/>
+</e:Skin>

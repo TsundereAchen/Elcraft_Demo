@@ -1,0 +1,110 @@
+{
+	"groups": [
+		{
+			"keys": "description_json,bg_leiste_png,bg_ofen_png,dead_png,fg_ofen_png,pappuga_splash_png,start_png,GameScene_png,stone1_png,stone10_png,stone9_png,stone8_png,stone7_png,stone6_png,stone5_png,stone4_png,stone3_png,stone2_png,stone12_png,stone11_png",
+			"name": "preload"
+		}
+	],
+	"resources": [
+		{
+			"name": "description_json",
+			"type": "json",
+			"url": "config/description.json"
+		},
+		{
+			"name": "bg_leiste_png",
+			"type": "image",
+			"url": "assets/bg_leiste.png"
+		},
+		{
+			"name": "bg_ofen_png",
+			"type": "image",
+			"url": "assets/bg_ofen.png"
+		},
+		{
+			"name": "dead_png",
+			"type": "image",
+			"url": "assets/dead.png"
+		},
+		{
+			"name": "fg_ofen_png",
+			"type": "image",
+			"url": "assets/fg_ofen.png"
+		},
+		{
+			"name": "pappuga_splash_png",
+			"type": "image",
+			"url": "assets/pappuga_splash.png"
+		},
+		{
+			"name": "start_png",
+			"type": "image",
+			"url": "assets/start.png"
+		},
+		{
+			"name": "GameScene_png",
+			"type": "image",
+			"url": "assets/GameScene.png"
+		},
+		{
+			"name": "stone1_png",
+			"type": "image",
+			"url": "assets/Stone/stone1.png"
+		},
+		{
+			"name": "stone10_png",
+			"type": "image",
+			"url": "assets/Stone/stone10.png"
+		},
+		{
+			"name": "stone9_png",
+			"type": "image",
+			"url": "assets/Stone/stone9.png"
+		},
+		{
+			"name": "stone8_png",
+			"type": "image",
+			"url": "assets/Stone/stone8.png"
+		},
+		{
+			"name": "stone7_png",
+			"type": "image",
+			"url": "assets/Stone/stone7.png"
+		},
+		{
+			"name": "stone6_png",
+			"type": "image",
+			"url": "assets/Stone/stone6.png"
+		},
+		{
+			"name": "stone5_png",
+			"type": "image",
+			"url": "assets/Stone/stone5.png"
+		},
+		{
+			"name": "stone4_png",
+			"type": "image",
+			"url": "assets/Stone/stone4.png"
+		},
+		{
+			"name": "stone3_png",
+			"type": "image",
+			"url": "assets/Stone/stone3.png"
+		},
+		{
+			"name": "stone2_png",
+			"type": "image",
+			"url": "assets/Stone/stone2.png"
+		},
+		{
+			"name": "stone12_png",
+			"type": "image",
+			"url": "assets/Stone/stone12.png"
+		},
+		{
+			"name": "stone11_png",
+			"type": "image",
+			"url": "assets/Stone/stone11.png"
+		}
+	]
+}

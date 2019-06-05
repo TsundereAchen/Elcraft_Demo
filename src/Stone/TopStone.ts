@@ -12,7 +12,7 @@ class TopStone extends  egret.DisplayObjectContainer {
 		var stone:Stone = new Stone();
 		var stoneImg = new egret.Bitmap(RES.getRes("stone1_png"));
 		stone.image = stoneImg;
-		stone.type=1;
+		stone.type=2;
 		this.BottomCenter(stone,s,x,y);
 		return stone;
 	}
@@ -21,14 +21,22 @@ class TopStone extends  egret.DisplayObjectContainer {
 	 * 初始化默认居中位置 
 	 */
 	private BottomCenter(stone: Stone,s: egret.DisplayObject,x: number,y : number):void{
-		var mapHight = s.stage.stageWidth;
-        var mapwight = s.stage.stageHeight;
-        var hight = stone.image.height;
-        var wight = stone.image.width; 
 		stone.X = x;
 		stone.Y = y;
 		stone.image.x = x;
 		stone.image.y = y;
 	}
 
+	//更换石块
+	public replaceImg(s: egret.DisplayObjectContainer,x: number,y : number,num: number): Stone{
+		var stone:Stone = new Stone();
+		var stoneImg = new egret.Bitmap(RES.getRes("stone"+num+"_png"));
+		stone.image = stoneImg;
+		stone.type=2;
+		stone.X = x;
+		stone.Y = y;
+		stone.image.x = x;
+		stone.image.y = y;
+		return stone;
+	}
 }

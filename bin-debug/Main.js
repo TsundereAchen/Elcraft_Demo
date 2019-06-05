@@ -232,16 +232,18 @@ var Main = (function (_super) {
         this.addChild(stone.image);
         this.centerStone.push(stone);
         stone = top2.init(this, 380, 230);
-        stone.image = new egret.Bitmap(RES.getRes("stone2_png"));
+        //stone.image = new egret.Bitmap(RES.getRes("stone2_png"));
         this.addChild(stone.image);
         this.centerStone.push(stone);
-        this.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.StoneMoveHandle, this);
-        this.addEventListener(egret.TouchEvent.TOUCH_TAP, this.StoneMoveHandle, this);
+        this.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.StoneChangeHandle, this);
+        this.addEventListener(egret.TouchEvent.TOUCH_TAP, this.StoneChangeHandle, this);
+        this.removeEventListener(egret.TouchEvent.TOUCH_MOVE, this.StoneMoveHandle, this);
+        this.addEventListener(egret.TouchEvent.TOUCH_MOVE, this.StoneMoveHandle, this);
     };
     /**
      * 石块变形处理(53~286)
      */
-    Main.prototype.StoneMoveHandle = function (e) {
+    Main.prototype.StoneChangeHandle = function (e) {
         var stone1 = this.centerStone[0];
         if (stone1.image == null)
             return;
@@ -282,6 +284,51 @@ var Main = (function (_super) {
             stone1.Y = wight2;
             stone1.image.y = wight2;
         }
+    };
+    /**
+     * 石块下滑处理
+     */
+    Main.prototype.StoneMoveHandle = function (e) {
+        //中部石块更新
+        this.centerUpdata();
+        //顶部石块更新
+        this.TopUpdata();
+    };
+    /**
+     * 最顶上石块更新
+     */
+    Main.prototype.TopUpdata = function () {
+        var num = this.topStone[0].type + 1;
+        this.topStone = [];
+        var top1 = new TopStone();
+        var random = new Random(10);
+        var stone = top1.replaceImg(this, 300, 50, random.nextInt(1, num));
+        this.addChild(stone.image);
+        this.topStone.push(stone);
+        stone = top1.replaceImg(this, 380, 50, random.nextInt(1, num));
+        this.addChild(stone.image);
+        this.topStone.push(stone);
+    };
+    /**
+     * 中部石块更新
+     */
+    Main.prototype.centerUpdata = function () {
+        this.centerStone = [];
+        var top1 = new CenterStone();
+        var stone = top1.replaceStone(this.topStone[0]);
+        stone.X = 300;
+        stone.Y = 230;
+        stone.image.x = 300;
+        stone.image.y = 230;
+        this.centerStone.push(stone);
+        this.addChild(stone.image);
+        stone = top1.replaceStone(this.topStone[1]);
+        stone.X = 380;
+        stone.Y = 230;
+        stone.image.x = 380;
+        stone.image.y = 230;
+        this.centerStone.push(stone);
+        this.addChild(stone.image);
     };
     return Main;
 }(eui.UILayer));

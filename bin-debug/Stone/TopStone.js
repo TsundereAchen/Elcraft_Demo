@@ -23,7 +23,7 @@ var TopStone = (function (_super) {
         var stone = new Stone();
         var stoneImg = new egret.Bitmap(RES.getRes("stone1_png"));
         stone.image = stoneImg;
-        stone.type = 1;
+        stone.type = 2;
         this.BottomCenter(stone, s, x, y);
         return stone;
     };
@@ -31,14 +31,21 @@ var TopStone = (function (_super) {
      * 初始化默认居中位置
      */
     TopStone.prototype.BottomCenter = function (stone, s, x, y) {
-        var mapHight = s.stage.stageWidth;
-        var mapwight = s.stage.stageHeight;
-        var hight = stone.image.height;
-        var wight = stone.image.width;
         stone.X = x;
         stone.Y = y;
         stone.image.x = x;
         stone.image.y = y;
+    };
+    TopStone.prototype.replaceImg = function (s, x, y, num) {
+        var stone = new Stone();
+        var stoneImg = new egret.Bitmap(RES.getRes("stone" + num + "_png"));
+        stone.image = stoneImg;
+        stone.type = 2;
+        stone.X = x;
+        stone.Y = y;
+        stone.image.x = x;
+        stone.image.y = y;
+        return stone;
     };
     return TopStone;
 }(egret.DisplayObjectContainer));

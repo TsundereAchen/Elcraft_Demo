@@ -249,6 +249,52 @@ class Main extends eui.UILayer {
      * 石块下滑处理
      */
     private StoneMoveHandle(e: egret.TouchEvent): void{
-            
+        //中部石块更新
+        this.centerUpdata();
+        //顶部石块更新
+        this.TopUpdata();
+
+    }
+
+    /**
+     * 最顶上石块更新
+     */
+    private TopUpdata():void {
+        var num = this.topStone[0].type+1;
+        this.topStone = [];
+        var top1 = new TopStone();
+        var random = new Random(10);
+        var stone = top1.replaceImg(this,300,50,random.nextInt(1,num));
+        this.addChild(stone.image);
+        this.topStone.push(stone); 
+
+        stone = top1.replaceImg(this,380,50,random.nextInt(1,num));
+        this.addChild(stone.image);
+        this.topStone.push(stone); 
+    }
+
+
+    /**
+     * 中部石块更新
+     */
+    private centerUpdata(): void{
+        this.centerStone = [];
+
+        var top1 = new CenterStone();
+        var stone = top1.replaceStone(this.topStone[0]);
+        stone.X = 300;
+		stone.Y = 230;
+		stone.image.x = 300;
+		stone.image.y = 230;
+        this.centerStone.push(stone);
+        this.addChild(stone.image);
+        
+        stone = top1.replaceStone(this.topStone[1]);
+        stone.X = 380;
+		stone.Y = 230;
+		stone.image.x = 380;
+		stone.image.y = 230;
+        this.centerStone.push(stone);
+        this.addChild(stone.image);
     }
 }

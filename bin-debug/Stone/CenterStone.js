@@ -31,6 +31,23 @@ var CenterStone = (function (_super) {
         stone.image.y = y;
         return stone;
     };
+    CenterStone.prototype.replaceImg = function (s, x, y, num) {
+        var stone = new Stone();
+        var stoneImg = new egret.Bitmap(RES.getRes("stone" + num + "_png"));
+        stone.image = stoneImg;
+        stone.type = 2;
+        stoneImg.touchEnabled = true;
+        stone.X = x;
+        stone.Y = y;
+        stone.image.x = x;
+        stone.image.y = y;
+        return stone;
+    };
+    CenterStone.prototype.replaceStone = function (stone) {
+        var stone1 = new Stone();
+        stone1.image = stone.image;
+        return stone1;
+    };
     return CenterStone;
 }(egret.DisplayObjectContainer));
 __reflect(CenterStone.prototype, "CenterStone");

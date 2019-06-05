@@ -8,15 +8,16 @@
 		"libs/modules/promise/promise.js"
 	],
 	"game": [
+		"bin-debug/Model/Stone.js",
 		"bin-debug/AssetAdapter.js",
-		"bin-debug/LoadingUI.js",
 		"bin-debug/Main.js",
 		"bin-debug/Platform.js",
 		"bin-debug/ThemeAdapter.js",
-		"bin-debug/Model/Stone.js",
+		"bin-debug/LoadingUI.js",
 		"bin-debug/Stone/BottomStone.js",
 		"bin-debug/Stone/CenterStone.js",
 		"bin-debug/Stone/TopStone.js",
+		"bin-debug/Unity/Random.js",
 		"bin-debug/View/StoneMap.js"
 	]
 }

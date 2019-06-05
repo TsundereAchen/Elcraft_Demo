@@ -22,5 +22,24 @@ class CenterStone extends  egret.DisplayObjectContainer {
 		return stone;
 	}
 
-	public 
+	
+	public replaceImg(s: egret.DisplayObjectContainer,x: number,y : number,num: number): Stone{
+		var stone:Stone = new Stone();
+		var stoneImg = new egret.Bitmap(RES.getRes("stone"+num+"_png"));
+		stone.image = stoneImg;
+		stone.type=2;
+		stoneImg.touchEnabled = true;
+		stone.X = x;
+		stone.Y = y;
+		stone.image.x = x;
+		stone.image.y = y;
+		return stone;
+	}
+	
+	//更换石块类型
+	public replaceStone(stone: Stone): Stone{
+		var stone1:Stone = new Stone();
+		stone1.image = stone.image;
+		return stone1;
+	}
 }

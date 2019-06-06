@@ -189,9 +189,11 @@ class Main extends eui.UILayer {
         this.removeEventListener(egret.TouchEvent.TOUCH_TAP,this.StoneChangeHandle,this);
 		this.addEventListener(egret.TouchEvent.TOUCH_TAP,this.StoneChangeHandle,this);
 
-        this.removeEventListener(egret.TouchEvent.TOUCH_MOVE,this.StoneMoveHandle,this);
-		this.addEventListener(egret.TouchEvent.TOUCH_MOVE,this.StoneMoveHandle,this);
+        this.centerStone[0].image.removeEventListener(egret.TouchEvent.TOUCH_MOVE,this.StoneMoveHandle,this);
+		this.centerStone[0].image.addEventListener(egret.TouchEvent.TOUCH_MOVE,this.StoneMoveHandle,this);
 
+        this.centerStone[1].image.removeEventListener(egret.TouchEvent.TOUCH_MOVE,this.StoneMoveHandle,this);
+		this.centerStone[1].image.addEventListener(egret.TouchEvent.TOUCH_MOVE,this.StoneMoveHandle,this);
 
     }
 
@@ -249,10 +251,14 @@ class Main extends eui.UILayer {
      * 石块下滑处理
      */
     private StoneMoveHandle(e: egret.TouchEvent): void{
+         //this.removeEventListener(egret.TouchEvent.TOUCH_TAP,this.StoneChangeHandle,this);
+
         //中部石块更新
         this.centerUpdata();
         //顶部石块更新
         this.TopUpdata();
+
+		//this.addEventListener(egret.TouchEvent.TOUCH_TAP,this.StoneChangeHandle,this);
 
     }
 
@@ -265,6 +271,7 @@ class Main extends eui.UILayer {
         var top1 = new TopStone();
         var random = new Random(10);
         var stone = top1.replaceImg(this,300,50,random.nextInt(1,num));
+       
         this.addChild(stone.image);
         this.topStone.push(stone); 
 
@@ -296,5 +303,12 @@ class Main extends eui.UILayer {
 		stone.image.y = 230;
         this.centerStone.push(stone);
         this.addChild(stone.image);
+    }
+
+    /**
+     * 底部石块更新
+     */
+    private BottomUpdata(): void{
+
     }
 }

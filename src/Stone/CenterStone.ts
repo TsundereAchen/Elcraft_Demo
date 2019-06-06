@@ -19,6 +19,7 @@ class CenterStone extends  egret.DisplayObjectContainer {
 		stone.Y = y;
 		stone.image.x = x;
 		stone.image.y = y;
+		stone.image.touchEnabled = true;
 		return stone;
 	}
 

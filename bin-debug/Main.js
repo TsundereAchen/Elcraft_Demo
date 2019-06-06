@@ -237,8 +237,10 @@ var Main = (function (_super) {
         this.centerStone.push(stone);
         this.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.StoneChangeHandle, this);
         this.addEventListener(egret.TouchEvent.TOUCH_TAP, this.StoneChangeHandle, this);
-        this.removeEventListener(egret.TouchEvent.TOUCH_MOVE, this.StoneMoveHandle, this);
-        this.addEventListener(egret.TouchEvent.TOUCH_MOVE, this.StoneMoveHandle, this);
+        this.centerStone[0].image.removeEventListener(egret.TouchEvent.TOUCH_MOVE, this.StoneMoveHandle, this);
+        this.centerStone[0].image.addEventListener(egret.TouchEvent.TOUCH_MOVE, this.StoneMoveHandle, this);
+        this.centerStone[1].image.removeEventListener(egret.TouchEvent.TOUCH_MOVE, this.StoneMoveHandle, this);
+        this.centerStone[1].image.addEventListener(egret.TouchEvent.TOUCH_MOVE, this.StoneMoveHandle, this);
     };
     /**
      * 石块变形处理(53~286)
@@ -289,10 +291,12 @@ var Main = (function (_super) {
      * 石块下滑处理
      */
     Main.prototype.StoneMoveHandle = function (e) {
+        //this.removeEventListener(egret.TouchEvent.TOUCH_TAP,this.StoneChangeHandle,this);
         //中部石块更新
         this.centerUpdata();
         //顶部石块更新
         this.TopUpdata();
+        //this.addEventListener(egret.TouchEvent.TOUCH_TAP,this.StoneChangeHandle,this);
     };
     /**
      * 最顶上石块更新
@@ -329,6 +333,11 @@ var Main = (function (_super) {
         stone.image.y = 230;
         this.centerStone.push(stone);
         this.addChild(stone.image);
+    };
+    /**
+     * 底部石块更新
+     */
+    Main.prototype.BottomUpdata = function () {
     };
     return Main;
 }(eui.UILayer));

@@ -29,6 +29,7 @@ var CenterStone = (function (_super) {
         stone.Y = y;
         stone.image.x = x;
         stone.image.y = y;
+        stone.image.touchEnabled = true;
         return stone;
     };
     CenterStone.prototype.replaceImg = function (s, x, y, num) {
@@ -43,6 +44,7 @@ var CenterStone = (function (_super) {
         stone.image.y = y;
         return stone;
     };
+    //更换石块类型
     CenterStone.prototype.replaceStone = function (stone) {
         var stone1 = new Stone();
         stone1.image = stone.image;

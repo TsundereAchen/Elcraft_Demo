@@ -36,6 +36,7 @@ var TopStone = (function (_super) {
         stone.image.x = x;
         stone.image.y = y;
     };
+    //更换石块
     TopStone.prototype.replaceImg = function (s, x, y, num) {
         var stone = new Stone();
         var stoneImg = new egret.Bitmap(RES.getRes("stone" + num + "_png"));

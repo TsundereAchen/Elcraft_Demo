@@ -80,7 +80,7 @@ var Main = (function (_super) {
         /**中部石块集合 */
         _this.centerStone = [];
         /**底部石块集合 */
-        _this.bottomStone = [][7];
+        _this.bottomStone = [];
         return _this;
     }
     Main.prototype.createChildren = function () {
@@ -235,6 +235,13 @@ var Main = (function (_super) {
         //stone.image = new egret.Bitmap(RES.getRes("stone2_png"));
         this.addChild(stone.image);
         this.centerStone.push(stone);
+        //初始化底下的石块
+        for (var i = 0; i < 7; ++i) {
+            this.bottomStone[i] = [];
+            for (var j = 0; j < 6; ++j) {
+                this.bottomStone[i] = new Array();
+            }
+        }
         this.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.StoneChangeHandle, this);
         this.addEventListener(egret.TouchEvent.TOUCH_TAP, this.StoneChangeHandle, this);
         this.centerStone[0].image.removeEventListener(egret.TouchEvent.TOUCH_MOVE, this.StoneMoveHandle, this);
@@ -246,10 +253,12 @@ var Main = (function (_super) {
      * 石块变形处理(53~286)
      */
     Main.prototype.StoneChangeHandle = function (e) {
+        console.warn("------变性-----");
         var stone1 = this.centerStone[0];
         if (stone1.image == null)
             return;
         var stone2 = this.centerStone[1];
+        //this.centerStone = [];
         var height1 = stone1.X;
         var wight1 = stone1.Y;
         var height2 = stone2.X;
@@ -286,12 +295,19 @@ var Main = (function (_super) {
             stone1.Y = wight2;
             stone1.image.y = wight2;
         }
+        this.addChild(stone1.image);
+        this.centerStone.push(stone1);
+        this.addChild(stone2.image);
+        this.centerStone.push(stone2);
     };
     /**
      * 石块下滑处理
      */
     Main.prototype.StoneMoveHandle = function (e) {
         //this.removeEventListener(egret.TouchEvent.TOUCH_TAP,this.StoneChangeHandle,this);
+        console.warn("-----下滑------");
+        //底部石块更新
+        this.BottomUpdata();
         //中部石块更新
         this.centerUpdata();
         //顶部石块更新
@@ -307,37 +323,114 @@ var Main = (function (_super) {
         var top1 = new TopStone();
         var random = new Random(10);
         var stone = top1.replaceImg(this, 300, 50, random.nextInt(1, num));
-        this.addChild(stone.image);
         this.topStone.push(stone);
+        this.addChild(stone.image);
         stone = top1.replaceImg(this, 380, 50, random.nextInt(1, num));
-        this.addChild(stone.image);
         this.topStone.push(stone);
+        this.addChild(stone.image);
     };
     /**
      * 中部石块更新
      */
     Main.prototype.centerUpdata = function () {
-        this.centerStone = [];
-        var top1 = new CenterStone();
-        var stone = top1.replaceStone(this.topStone[0]);
-        stone.X = 300;
-        stone.Y = 230;
-        stone.image.x = 300;
-        stone.image.y = 230;
-        this.centerStone.push(stone);
-        this.addChild(stone.image);
-        stone = top1.replaceStone(this.topStone[1]);
-        stone.X = 380;
-        stone.Y = 230;
-        stone.image.x = 380;
-        stone.image.y = 230;
-        this.centerStone.push(stone);
-        this.addChild(stone.image);
+        // this.removeChild(this.centerStone[0].image);
+        // this.removeChild(this.centerStone[1].image);
+        var stone1 = new Stone();
+        //if(stone1.image==null) return;
+        var stone2 = new Stone();
+        // this.centerStone = [];
+        var height1 = this.topStone[0].X;
+        var wight1 = this.topStone[0].Y;
+        var height2 = this.topStone[1].X;
+        var wight2 = this.topStone[1].Y;
+        stone1.X = height1;
+        stone1.Y = wight1 + 170;
+        stone1.image = this.topStone[0].image;
+        stone1.image.x = height1;
+        stone1.image.y = wight1 + 170;
+        stone2.X = height2;
+        stone2.Y = wight2 + 170;
+        stone2.image = this.topStone[1].image;
+        stone2.image.x = height2;
+        stone2.image.y = wight2 + 170;
+        this.addChild(stone1.image);
+        this.centerStone[0] = stone1;
+        this.addChild(stone2.image);
+        this.centerStone[1] = stone2;
     };
     /**
      * 底部石块更新
      */
     Main.prototype.BottomUpdata = function () {
+        var stone1 = new Stone();
+        //if(stone1.image==null) return;
+        var stone2 = new Stone();
+        //保证stone1在下方
+        if (this.centerStone[0].Y > this.centerStone[1].Y || this.centerStone[0].X < this.centerStone[1].X) {
+            var height1 = this.centerStone[0].X;
+            var wight1 = this.centerStone[0].Y;
+            var height2 = this.centerStone[1].X;
+            var wight2 = this.centerStone[1].Y;
+        }
+        else {
+            var height1 = this.centerStone[1].X;
+            var wight1 = this.centerStone[1].Y;
+            var height2 = this.centerStone[0].X;
+            var wight2 = this.centerStone[0].Y;
+        }
+        //同一列
+        if (height1 == height2) {
+            for (var i = 1; i < 7; ++i) {
+                if (this.bottomStone[i][wight1] == null) {
+                    stone1.X = height1;
+                    var img1 = this.centerStone[0].image;
+                    stone1.image = img1;
+                    stone1.image.x = height1;
+                    stone1.Y = (i + 1) * 80 + 270;
+                    stone1.image.y = (i + 1) * 80 + 270;
+                    this.bottomStone[i][height1] = stone1;
+                    this.addChild(stone1.image);
+                    stone2.X = height2;
+                    img1 = this.centerStone[1].image;
+                    stone2.image = img1;
+                    stone2.image.x = height2;
+                    stone2.Y = (i) * 80 + 270;
+                    stone2.image.y = (i) * 80 + 270;
+                    this.bottomStone[i - 1][height2] = stone2;
+                    this.addChild(stone2.image);
+                }
+                else {
+                    break;
+                }
+            }
+        }
+        else {
+            for (var i = 0; i < 7; ++i) {
+                if (this.bottomStone[i][wight1] == null) {
+                    stone1.X = height1;
+                    stone1.image = this.centerStone[0].image;
+                    stone1.image.x = height1;
+                    stone1.Y = (i + 1) * 80 + 270;
+                    stone1.image.y = (i + 1) * 80 + 270;
+                    this.bottomStone[i][height1] = stone1;
+                    this.addChild(stone1.image);
+                }
+                if (this.bottomStone[i][wight2] == null) {
+                    stone2.X = height1;
+                    stone2.image = this.centerStone[1].image;
+                    stone2.image.x = height2;
+                    stone2.Y = (i + 1) * 80 + 270;
+                    stone2.image.y = (i + 1) * 80 + 270;
+                    this.bottomStone[i][height2] = stone2;
+                    this.addChild(stone2.image);
+                }
+            }
+        }
+    };
+    /**
+     * 检测消除
+     */
+    Main.prototype.checkEliminate = function () {
     };
     return Main;
 }(eui.UILayer));

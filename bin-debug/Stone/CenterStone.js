@@ -32,12 +32,11 @@ var CenterStone = (function (_super) {
         stone.image.touchEnabled = true;
         return stone;
     };
-    CenterStone.prototype.replaceImg = function (s, x, y, num) {
+    CenterStone.prototype.replaceImg = function (s, x, y, img) {
         var stone = new Stone();
-        var stoneImg = new egret.Bitmap(RES.getRes("stone" + num + "_png"));
-        stone.image = stoneImg;
+        stone.image = img;
         stone.type = 2;
-        stoneImg.touchEnabled = true;
+        img.touchEnabled = true;
         stone.X = x;
         stone.Y = y;
         stone.image.x = x;

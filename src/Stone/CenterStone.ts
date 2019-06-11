@@ -1,7 +1,7 @@
 /**
  * 中部的石头
  */
-class CenterStone extends  egret.DisplayObjectContainer {
+class CenterStone extends egret.DisplayObjectContainer {
 	public constructor() {
 		super();
 	}
@@ -24,12 +24,11 @@ class CenterStone extends  egret.DisplayObjectContainer {
 	}
 
 	
-	public replaceImg(s: egret.DisplayObjectContainer,x: number,y : number,num: number): Stone{
+	public replaceImg(s: egret.DisplayObjectContainer,x: number,y : number,img: egret.Bitmap): Stone{
 		var stone:Stone = new Stone();
-		var stoneImg = new egret.Bitmap(RES.getRes("stone"+num+"_png"));
-		stone.image = stoneImg;
+		stone.image = img;
 		stone.type=2;
-		stoneImg.touchEnabled = true;
+		img.touchEnabled = true;
 		stone.X = x;
 		stone.Y = y;
 		stone.image.x = x;
